@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/fluid/cloud.svg">
+  <link rel="icon" href="/fluid/cloud.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="git clone的速度因为一些不可抗力变得很慢，使用代理可以有效解决这一问题，具体的使用方法如下">
+  <meta name="author" content="WXZhao">
+  <meta name="keywords" content="Geophysics">
+  
+  <title>git使用代理加速 - WXZhao&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wxzhao7.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"W5WRWugRkMOwDEzW0K4odffc-gzGzoHsz","app_key":"YujXua10nFIsqCBiNtvLJ2tv","server_url":"https://w5wrwugr.lc-cn-n1-shared.com"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>WXZhao's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="git使用代理加速">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      WXZhao
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-02 21:29" pubdate>
+        2020年5月2日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git使用代理加速</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月28日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="0-写在前面"><a href="#0-写在前面" class="headerlink" title="0.写在前面"></a>0.写在前面</h2><p>Git 目前支持的四种协议本地协议、 <code>git://</code>、<code>ssh://</code> 和 <code>http://</code>，其代理配置各不相同：<code>core.gitproxy</code> 用于 <code>git://</code> 协议（没用过，不管它），<code>http.proxy</code> 用于 <code>http://</code> 协议，<code>ssh://</code> 协议的代理需要配置 ssh 的 <code>ProxyCommand</code> 参数。</p>
+<h3 id="代理问题"><a href="#代理问题" class="headerlink" title="代理问题"></a>代理问题</h3><p><strong>如何使用不存在的Google不在讨论范围内！但是使用全局代理也并不能对git有效，原理不做讨论~</strong></p>
+<ul>
+<li>如果远程仓库的格式像下面那样，这种就是<strong>使用 HTTP 或 HTTPS 协议连接到 Git 仓库</strong>的情况</li>
+</ul>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;github.com&#x2F;cms-sw&#x2F;cmssw.git
+https:&#x2F;&#x2F;github.com&#x2F;cms-sw&#x2F;cmssw.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<ul>
+<li>如果远程仓库的格式像下面那样，这种就是<strong>使用 SSH 协议连接到 Git 仓库</strong>的情况</li>
+</ul>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">git@github.com:cms-sw&#x2F;cmssw.git
+ssh:&#x2F;&#x2F;git@github.com&#x2F;cms-sw&#x2F;cmssw.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<h2 id="1-HTTP形式"><a href="#1-HTTP形式" class="headerlink" title="1. HTTP形式"></a>1. HTTP形式</h2><h3 id="1-1-HTTP代理的配置"><a href="#1-1-HTTP代理的配置" class="headerlink" title="1.1 HTTP代理的配置"></a>1.1 HTTP代理的配置</h3><p>针对所有域名的 Git 仓库</p>
+<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git config –global http.proxy protocol:&#x2F;&#x2F;127.0.0.1:port<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p><strong>注意</strong>： –glboal 选项指的是修改 Git 的全局配置文件 ~/.gitconfig，而非各个 Git 仓库里的配置文件 .git/config。protocol 指的是代理的协议，如 http，https，socks5 等。port 则为端口号。<br><strong>举例</strong>：</p>
+<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#socks5协议
+git config --global http.proxy socks5:&#x2F;&#x2F;127.0.0.1:1088
+#http协议
+git config --global http.proxy http:&#x2F;&#x2F;127.0.0.1:8888
+#https协议
+git config --global http.proxy https:&#x2F;&#x2F;127.0.0.1:8888<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>针对特定域名的 Git 仓库</p>
+<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git config –global http.url.proxy protocol:&#x2F;&#x2F;127.0.0.1:port<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>此处的 url 即为你需要走代理的仓库域名，url 以 http:// 和 https:// 打头的均用这个方法。</li>
+<li>网上很多中文教程，可能会告诉你 https:// 打头的 url 使用“git config –global https.<a target="_blank" rel="noopener" href="https://example.com.proxy/">https://example.com.proxy</a> protocol://127.0.0.1:port”，这种做法其实是错的！记住一点：Git 不认 https.proxy*，设置 *http.proxy 就可以支持 https 了。</li>
+<li>如果想了解 url 的更多模式，如子域名等的情况，可参照 <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-config">Git 的官方文档</a> 。网页内容搜索 http.<url>.*，即可找到相关信息。</url></li>
+</ul>
+<p><strong>举例</strong>: </p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">git clone https:&#x2F;&#x2F;github.com&#x2F;&lt;user&gt;&#x2F;&lt;repository&gt;.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># socks5协议
+git config --global http.https:&#x2F;&#x2F;github.com.proxy socks5:&#x2F;&#x2F;127.0.0.1:1088
+# http协议
+git config --global http.https:&#x2F;&#x2F;github.com.proxy http:&#x2F;&#x2F;127.0.0.1:8888<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="1-2-HTTP代理的使用"><a href="#1-2-HTTP代理的使用" class="headerlink" title="1.2 HTTP代理的使用"></a>1.2 HTTP代理的使用</h3><div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 查看所有配置
+git config -l
+# reset 代理设置
+git config --global --unset http.proxy
+git config --global --unset https.proxy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="2-SSH形式"><a href="#2-SSH形式" class="headerlink" title="2. SSH形式"></a>2. SSH形式</h2><p>在这种情况下，Git 依靠 ssh 处理连接； 为了通过代理进行连接，您必须配置 ssh 本身，在 <code>~/.ssh/config</code> 文件中设置 <strong>ProxyCommand</strong> 选项。Linux 和 macOS 是通过 <code>nc</code> 来执行 ProxyCommand 的，Windows 下则是通过 <code>connect</code>。</p>
+<p>Windows更多的细节参考<a target="_blank" rel="noopener" href="https://bitbucket.org/gotoh/connect/wiki/Home#!more-detail">connect官方文档</a></p>
+<p>Linux &amp; Mac直接使用<code>netcat</code>完成相关操作</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">ProxyCommand &quot;C:\Program Files\Git\mingw64\bin\connect.exe&quot; -S 127.0.0.1:1088 %h %p
+ProxyCommand &quot;C:\Program Files\Git\mingw64\bin\connect.exe&quot; -H 127.0.0.1:8888 %h %p
+# 测试省略路径依旧可以实现
+# SOCKS
+ProxyCommand connect -S 127.0.0.1:1080 %h %p
+# HTTP
+ProxyCommand connect -H 127.0.0.1:1080 %h %p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="Linux-amp-Mac"><a href="#Linux-amp-Mac" class="headerlink" title="Linux &amp; Mac"></a>Linux &amp; Mac</h3><div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 完整语句
+ProxyCommand &#x2F;usr&#x2F;bin&#x2F;ncat --proxy 127.0.0.1:1088 --proxy-type http %h %p
+# HTTP
+ProxyCommand nc -X connect -x 127.0.0.1:7890 %h %p
+# SOCKS
+ProxyCommand nc -X 5 -x 127.0.0.1:7891 %h %p
+ProxyCommand nc -x 127.0.0.1:7891 %h %p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>所以以下 2 种的写法效果一样 ，都指的是走 socks5 代理：</p>
+<blockquote>
+<ul>
+<li>如果你的代理使用的协议是 socks4/5 , 修改 –proxy-type 后面的协议即可, 例如<br>–proxy-type socks4<br>–proxy-type socks5</li>
+<li>在调用 ProxyCommand 时，％h 和 ％p 将会被自动替换为目标主机名和 SSH 命令指定的端口（%h 和 %p 不要修改，保留原样即可）。</li>
+<li>-X 选项后面接的是 connect 的意思是 HTTPS 代理。<br>-x 选项后面加上代理地址和端口号。</li>
+<li>如果 -X 选项后面接的是数字 5，那么指的就是 socks5 代理。<br>当然你直接不写上 -X 选项也是可以的，因为在没有指定协议的情况下，默认是使用socks5代理的。</li>
+</ul>
+</blockquote>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="主要参考文章"><a href="#主要参考文章" class="headerlink" title="主要参考文章"></a>主要参考文章</h3><p><a target="_blank" rel="noopener" href="https://ericclose.github.io/git-proxy-config.html">一文让你了解如何为 Git 设置代理</a></p>
+<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh_config">ssh_config</a> ProxyCommand 的内容</p>
+<p><a target="_blank" rel="noopener" href="https://man.openbsd.org/nc">nc</a> <code>-X</code> 和 <code>-x</code> 选项的的内容:</p>
+<p><a target="_blank" rel="noopener" href="https://bitbucket.org/gotoh/connect/wiki/Home#!more-detail">connect</a> <code>-H</code> 和 <code>S</code> 选项的内容</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/code/">code</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020-05-04/Advances-in-Seismic-Exploration/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Advances-in-Seismic-Exploration</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020-05-02/Hexo-Blog/">
+                        <span class="hidden-mobile">Hexo博客的构建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
