@@ -1,0 +1,172 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>git入门 - wxzhao's blog</title><meta name=Description content="学习Git的使用记录"><meta property="og:title" content="git入门"><meta property="og:description" content="学习Git的使用记录"><meta property="og:type" content="article"><meta property="og:url" content="http://example.org/introduction-of-git/"><meta property="og:image" content="http://example.org/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-04-30T18:49:12+00:00"><meta property="article:modified_time" content="2023-07-09T23:00:23+08:00"><meta property="og:site_name" content="wxzhao's blog"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://example.org/logo.png"><meta name=twitter:title content="git入门"><meta name=twitter:description content="学习Git的使用记录"><meta name=application-name content="我的网站"><meta name=apple-mobile-web-app-title content="我的网站"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/introduction-of-git/><link rel=prev href=http://example.org/weekly-report/><link rel=next href=http://example.org/remote-work/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"git入门","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/introduction-of-git\/"},"genre":"posts","keywords":"git","wordcount":1497,"url":"http:\/\/example.org\/introduction-of-git\/","datePublished":"2020-04-30T18:49:12+00:00","dateModified":"2023-07-09T23:00:23+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"wxzhao"},"description":"学习Git的使用记录"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="wxzhao's blog"><span id=id-1 class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="wxzhao's blog"><span id=id-2 class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">git入门</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>wxzhao</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2020-04-30>2020-04-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;1497 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;3 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept=true><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#1-下载和安装git>1. 下载和安装git</a></li><li><a href=#2git-配置>2.Git 配置</a><ul><li><a href=#用户信息>用户信息</a></li><li><a href=#文本编辑器>文本编辑器</a></li><li><a href=#差异分析工具>差异分析工具</a></li><li><a href=#查看配置信息>查看配置信息</a></li><li><a href=#实用小技巧>实用小技巧</a></li></ul></li><li><a href=#3git的逻辑>3.git的逻辑</a></li><li><a href=#4git的使用>4.git的使用</a></li></ul></nav></div></div><div class=content id=content><h2 id=1-下载和安装git>1. 下载和安装git</h2><p>Git 目前支持 Linux/Unix、Solaris、Mac和 Windows 平台上运行</p><p>Git 各平台安装包下载地址为：<a href=https://git-scm.com/downloads target=_blank rel="noopener noreffer">Git</a></p><p>各个平台的安装参考：<a href=https://www.runoob.com/git/git-install-setup.html target=_blank rel="noopener noreffer">Git安装和配置教程-菜鸟教程</a></p><h2 id=2git-配置>2.Git 配置</h2><p>首先在本地创建<code>ssh key；</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ssh-keygen -t rsa -C &#34;your_email@youremail.com&#34; [-f /path/file]
+</span></span></code></pre></td></tr></table></div></div><p>环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：</p><ul><li><code>/etc/gitconfig</code> 文件：系统中对所有用户都普遍适用的配置。若使用 <code>git config</code> 时用 <code>--system</code> 选项，读写的就是这个文件。</li><li><code>~/.gitconfig</code> 文件：用户目录下的配置文件只适用于该用户。若使用 <code>git config</code> 时用 <code>--global</code> 选项，读写的就是这个文件。</li><li>当前项目的 Git 目录中的配置文件（也就是工作目录中的 <code>.git/config</code> 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 <code>.git/config</code> 里的配置会覆盖 <code>/etc/gitconfig</code> 中的同名变量。</li></ul><h3 id=用户信息>用户信息</h3><p>配置个人的用户名称和电子邮件地址：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>git config --global user.name &#34;runoob&#34;
+</span></span><span class=line><span class=cl>git config --global user.email test@runoob.com
+</span></span></code></pre></td></tr></table></div></div><p>如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 &ndash;global 选项重新配置即可，新的设定保存在当前项目的 .git/config 文件里。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>git config --system：使对应配置针对系统内所有的用户有效
+</span></span><span class=line><span class=cl>git config --global：使对应配置针对当前系统用户的所有仓库生效
+</span></span><span class=line><span class=cl>git config --local：使对应配置只针对当前仓库有效
+</span></span><span class=line><span class=cl>local选项设置的优先级最高。
+</span></span></code></pre></td></tr></table></div></div><h3 id=文本编辑器>文本编辑器</h3><p>设置Git默认使用的文本编辑器, 一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置：:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ git config --global core.editor emacs
+</span></span></code></pre></td></tr></table></div></div><h3 id=差异分析工具>差异分析工具</h3><p>还有一个比较常用的是，在解决合并冲突时使用哪种差异分析工具。比如要改用 vimdiff 的话：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ git config --global merge.tool vimdiff
+</span></span></code></pre></td></tr></table></div></div><h3 id=查看配置信息>查看配置信息</h3><p>要检查已有的配置信息，可以使用 git config &ndash;list 命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ git config --list
+</span></span><span class=line><span class=cl>http.postbuffer=2M
+</span></span><span class=line><span class=cl>user.name=runoob
+</span></span><span class=line><span class=cl>user.email=test@runoob.com
+</span></span></code></pre></td></tr></table></div></div><h3 id=实用小技巧>实用小技巧</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#内建的图形化 git：</span>
+</span></span><span class=line><span class=cl>gitk
+</span></span><span class=line><span class=cl><span class=c1>#彩色的 git 输出：</span>
+</span></span><span class=line><span class=cl>git config color.ui <span class=nb>true</span>
+</span></span><span class=line><span class=cl><span class=c1>#显示历史记录时，每个提交的信息只显示一行：</span>
+</span></span><span class=line><span class=cl>git config format.pretty oneline
+</span></span><span class=line><span class=cl><span class=c1>#交互式添加文件到暂存区：</span>
+</span></span><span class=line><span class=cl>git add -i
+</span></span></code></pre></td></tr></table></div></div><h2 id=3git的逻辑>3.git的逻辑</h2><h2 id=4git的使用>4.git的使用</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>find .git/objects/
+</span></span><span class=line><span class=cl>git log --oneline
+</span></span><span class=line><span class=cl>git status
+</span></span><span class=line><span class=cl>git cat-file -t 
+</span></span><span class=line><span class=cl>git cat-file -p
+</span></span><span class=line><span class=cl>git rev-parse
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>git diff
+</span></span><span class=line><span class=cl>比较工作区和暂存区
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff HEAD
+</span></span><span class=line><span class=cl>比较工作区和当前分支最新的提交，你可以把HEAD换成别的分支的名字，比如test分支，<span class=s2>&#34;git diff test&#34;</span>表示比较当前工作区和test分支最新的提交之间的差异，也可以把HEAD替换成任何一个commit的ID，表示比较当前工作区和对应提交之间的差异。
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff --cached
+</span></span><span class=line><span class=cl>比较暂存区和当前分支最新的提交
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>上述命令都是比较所有文件的差异，如果想要指定文件，可以使用<span class=s2>&#34;--&#34;</span>指定文件的路径，文件路径可以有多个，用空格隔开。
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff -- file1
+</span></span><span class=line><span class=cl>git diff -- ./file1
+</span></span><span class=line><span class=cl>只比较工作区和暂存区中file1文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff -- file1 file2
+</span></span><span class=line><span class=cl>只比较工作区和暂存区中file1以及file2文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff -- dir1/d1/f1
+</span></span><span class=line><span class=cl>只比较工作区和暂存区中dir1/d1/f1文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff -- dir1/
+</span></span><span class=line><span class=cl>只比较工作区和暂存区中dir1目录中所有文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff HEAD -- ./file1
+</span></span><span class=line><span class=cl>只比较工作区和当前分支最新的提交中file1文件的差异，HEAD可以替换成分支名或者commitID
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff testbranch -- ./file1
+</span></span><span class=line><span class=cl>只比较工作区和testbranch分支最新的提交中file1文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff --cached testbranch
+</span></span><span class=line><span class=cl>比较暂存区和testbranch分支最新的提交
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff --cached testbranch --./file1
+</span></span><span class=line><span class=cl>只比较暂存区和testbranch分支最新的提交中file1文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff HEAD~ HEAD
+</span></span><span class=line><span class=cl>比较当前分支中最新的两个提交之间的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff HEAD~ HEAD -- file1
+</span></span><span class=line><span class=cl>比较当前分支中最新的两个提交中的file1文件的差异
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff commitID1 commitID2
+</span></span><span class=line><span class=cl>比较两个commit之间的差异
+</span></span><span class=line><span class=cl>git diff commitID1..commitID2
+</span></span><span class=line><span class=cl>同上，比较两个commit之间的差异，两个命令等效
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>git diff branch1 branch2
+</span></span><span class=line><span class=cl>比较两个分支上最新提交之间的差异
+</span></span><span class=line><span class=cl>git diff branch1..branch2
+</span></span><span class=line><span class=cl>同上，比较两个分支上最新提交之间的差异，两个命令等效
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-07-09</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/introduction-of-git/index.md target=_blank>Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=http://example.org/introduction-of-git/ data-title=git入门 data-via=xxxx data-hashtags=git><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=http://example.org/introduction-of-git/ data-hashtag=git><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=http://example.org/introduction-of-git/ data-title=git入门><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=http://example.org/introduction-of-git/ data-title=git入门><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=http://example.org/introduction-of-git/ data-title=git入门><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/git/>git</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/weekly-report/ class=prev rel=prev title=Weekly-Report><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Weekly-Report</a>
+<a href=/remote-work/ class=next rel=next title=远程办公>远程办公<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.115.2">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2019 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>wxzhao</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/index.umd.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"id-1":"wxzhao's blog","id-2":"wxzhao's blog"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:50,type:"lunr"},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"id-1":["id-1"],"id-2":["id-2"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

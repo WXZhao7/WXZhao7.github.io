@@ -1,0 +1,69 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>plot - Tag - wxzhao's blog</title><link>http://example.org/tags/plot/</link><description>plot - Tag - wxzhao's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>wxzhao7@gmail.com (wxzhao)</managingEditor><webMaster>wxzhao7@gmail.com (wxzhao)</webMaster><lastBuildDate>Sun, 26 Apr 2020 00:09:26 +0000</lastBuildDate><atom:link href="http://example.org/tags/plot/" rel="self" type="application/rss+xml"/><item><title>Modified-subplot</title><link>http://example.org/modified-subplot/</link><pubDate>Sun, 26 Apr 2020 00:09:26 +0000</pubDate><author>wxzhao</author><guid>http://example.org/modified-subplot/</guid><description><![CDATA[<h2 id="modified-subplotm">Modified subplot.m</h2>
+<p>This function can return the positions of subplot, so we can easily use <code>axes</code> or <code>polaraxes</code> to plot the subpannel~</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="k">function</span><span class="w"> </span>[p] <span class="p">=</span><span class="w"> </span><span class="nf">subposition</span><span class="p">(</span>m,n,margin,gap<span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">% Uniform m*n subplot positions</span>
+</span></span><span class="line"><span class="cl"><span class="c">% Input:</span>
+</span></span><span class="line"><span class="cl"><span class="c">%       m,n     m*n grids</span>
+</span></span><span class="line"><span class="cl"><span class="c">%       margin  [mL,mR,mU,mB]     </span>
+</span></span><span class="line"><span class="cl"><span class="c">%       gap     [gW,gH]</span>
+</span></span><span class="line"><span class="cl"><span class="c">%       </span>
+</span></span><span class="line"><span class="cl"><span class="c">% Output:</span>
+</span></span><span class="line"><span class="cl"><span class="c">%       p       m*n cells, the position of each grid</span>
+</span></span><span class="line"><span class="cl"><span class="c">% </span>
+</span></span><span class="line"><span class="cl">    <span class="n">mL</span> <span class="p">=</span> <span class="n">margin</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mR</span> <span class="p">=</span> <span class="n">margin</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mU</span> <span class="p">=</span> <span class="n">margin</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mB</span> <span class="p">=</span> <span class="n">margin</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gW</span> <span class="p">=</span> <span class="n">gap</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gH</span> <span class="p">=</span> <span class="n">gap</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="p">=</span> <span class="n">cell</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">W</span> <span class="p">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mL</span><span class="o">-</span><span class="n">mR</span><span class="o">-</span><span class="n">gW</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">H</span> <span class="p">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mU</span><span class="o">-</span><span class="n">mB</span><span class="o">-</span><span class="n">gH</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">W</span><span class="o">&lt;</span><span class="p">=</span><span class="mi">0</span> <span class="o">|</span> <span class="n">H</span><span class="o">&lt;</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">error</span><span class="p">(</span><span class="s">&#39;Input error!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">im</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">m</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">in</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pL</span> <span class="p">=</span> <span class="n">mL</span><span class="o">+</span><span class="p">(</span><span class="n">W</span><span class="o">+</span><span class="n">gW</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">in</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pB</span> <span class="p">=</span> <span class="n">mU</span><span class="o">+</span><span class="p">(</span><span class="n">H</span><span class="o">+</span><span class="n">gH</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">im</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">in</span><span class="p">)</span> <span class="p">=</span> <span class="p">{[</span><span class="n">pL</span><span class="p">,</span><span class="n">pB</span><span class="p">,</span><span class="n">W</span><span class="p">,</span><span class="n">H</span><span class="p">]};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description></item></channel></rss>

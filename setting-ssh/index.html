@@ -1,0 +1,426 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>SSH的配置 - wxzhao's blog</title><meta name=Description content="wxzhao's simple blog"><meta property="og:title" content="SSH的配置"><meta property="og:description" content="前言 在使用远程设备的时候，SSH是一种高效便捷且安全的手段，使用命令行界面可以有效节省资源并减轻带宽压力。远程桌面是一种解决方案，但是除非在"><meta property="og:type" content="article"><meta property="og:url" content="http://example.org/setting-ssh/"><meta property="og:image" content="http://example.org/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-05-01T20:56:31+00:00"><meta property="article:modified_time" content="2023-07-09T23:00:23+08:00"><meta property="og:site_name" content="wxzhao's blog"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://example.org/logo.png"><meta name=twitter:title content="SSH的配置"><meta name=twitter:description content="前言 在使用远程设备的时候，SSH是一种高效便捷且安全的手段，使用命令行界面可以有效节省资源并减轻带宽压力。远程桌面是一种解决方案，但是除非在"><meta name=application-name content="我的网站"><meta name=apple-mobile-web-app-title content="我的网站"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/setting-ssh/><link rel=prev href=http://example.org/remote-work/><link rel=next href=http://example.org/hexo-blog/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"SSH的配置","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/setting-ssh\/"},"genre":"posts","keywords":"ssh","wordcount":4383,"url":"http:\/\/example.org\/setting-ssh\/","datePublished":"2020-05-01T20:56:31+00:00","dateModified":"2023-07-09T23:00:23+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"wxzhao"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="wxzhao's blog"><span id=id-1 class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="wxzhao's blog"><span id=id-2 class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SSH的配置</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>wxzhao</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2020-05-01>2020-05-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;4383 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;9 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept=true><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#前言>前言</a></li><li><a href=#产生密钥>产生密钥</a><ul><li><ul><li><a href=#ssh-keygen命令>ssh-keygen命令</a></li><li><a href=#举个栗子>举个栗子：</a></li></ul></li></ul></li><li><a href=#将公钥添加到指定的账户>将公钥添加到指定的账户</a></li><li><a href=#删除公钥>删除公钥</a></li><li><a href=#使用ssh-agentssh代理管理密钥>使用ssh-agent（ssh代理）管理密钥</a><ul><li><ul><li><a href=#1-启动ssh-agent>1. 启动ssh-agent</a></li><li><a href=#2-关闭ssh-agent>2. 关闭ssh-agent</a></li><li><a href=#3-添加私钥>3. 添加私钥</a></li><li><a href=#4-查找和删除密钥>4. 查找和删除密钥</a></li><li><a href=#5-锁定和解锁ssh-sgent>5. 锁定和解锁ssh-sgent</a></li><li><a href=#6-ssh-add命令>6. ssh-add命令</a></li></ul></li></ul></li><li><a href=#ssh配置文件>ssh配置文件</a><ul><li><a href=#ssh客户端按以下优先顺序接收其配置>ssh客户端按以下优先顺序接收其配置：</a></li><li><a href=#ssh用户配置文件>ssh用户配置文件</a><ul><li><a href=#跳板机相关设置>跳板机相关设置</a></li></ul></li><li><a href=#ssh系统配置文件>ssh系统配置文件</a></li><li><a href=#ssh服务器配置文件>ssh服务器配置文件</a></li></ul></li><li><a href=#个人使用示例>个人使用示例</a><ul><li><ul><li><a href=#配置示例>配置示例</a></li><li><a href=#实际使用栗子>实际使用栗子</a></li></ul></li></ul></li><li><a href=#参考文章>参考文章</a></li></ul></nav></div></div><div class=content id=content><h2 id=前言>前言</h2><p>在使用远程设备的时候，SSH是一种高效便捷且安全的手段，使用命令行界面可以有效节省资源并减轻带宽压力。远程桌面是一种解决方案，但是除非在局域网环境或者极其奢侈的网络条件下才能有较为稳定低延迟的体验，但是这肯定是对于资源的一种浪费，因此使用SSH或者web界面才是如今的王道！</p><h2 id=产生密钥>产生密钥</h2><h4 id=ssh-keygen命令>ssh-keygen命令</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh-keygen 
+</span></span><span class=line><span class=cl>   -b：指定密钥长度；
+</span></span><span class=line><span class=cl>   -e：读取openssh的私钥或者公钥文件；
+</span></span><span class=line><span class=cl>   -C：添加注释；
+</span></span><span class=line><span class=cl>   -f：指定用来保存密钥的文件名；
+</span></span><span class=line><span class=cl>   -i：读取未加密的ssh-v2兼容的私钥/公钥文件，然后在标准输出设备上显示openssh兼容的私钥/公钥；
+</span></span><span class=line><span class=cl>   -l：显示公钥文件的指纹数据；
+</span></span><span class=line><span class=cl>   -N：提供一个新密语；
+</span></span><span class=line><span class=cl>   -P：提供（旧）密语；
+</span></span><span class=line><span class=cl>   -q：静默模式；
+</span></span><span class=line><span class=cl>   -t：指定要创建的密钥类型。
+</span></span></code></pre></td></tr></table></div></div><p>以上的选项中比较重要的是：<code>-C, -f, -P</code></p><ol><li><code>-C</code>在github的密钥产生中会用到；</li><li><code>-f</code>可以指定生成的路径和文件名【 】；</li><li><code>-P</code>指定密钥的密语（密码）。</li></ol><h4 id=举个栗子>举个栗子：</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh-keygen -t rsa -b <span class=m>4096</span> -C <span class=s2>&#34;your_email@email.com&#34;</span> -P <span class=s1>&#39;****&#39;</span> -f /path/filename
+</span></span></code></pre></td></tr></table></div></div><p>问题1：如果不使用默认名称，需要使用<code>ssh -i /path/file user@IP ...</code>来登录</p><p>问题2：使用-P或者在交互界面设置密语有助于提高密钥的安全性，但是在设置密语后每次SSH登录均需要密码，为了方便反而带来不便？</p><p>这些问题在后面都会解决的！</p><h2 id=将公钥添加到指定的账户>将公钥添加到指定的账户</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#方法1</span>
+</span></span><span class=line><span class=cl><span class=c1>#一般使用</span>
+</span></span><span class=line><span class=cl>ssh-copy-id -i /path/file.pub user@IP <span class=o>[</span>-p****<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=c1>#有些系统使用</span>
+</span></span><span class=line><span class=cl>ssh-copy-id -i /path/file.pub <span class=s2>&#34;user@IP [-p****]&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1>#方法2</span>
+</span></span><span class=line><span class=cl>cat /path/file.pub <span class=p>|</span> ssh <span class=o>[</span>-p **<span class=o>]</span> user@IP <span class=s2>&#34;umask 077;mkdir -p ~/.ssh;cat - &gt;&gt; ~/.ssh/authorized_keys&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=删除公钥>删除公钥</h2><blockquote><p>如果是Linux运维，需要操作大量的设备，使用<strong>ssh端口转发</strong>来解决多设备问题</p><p>参考<a href=http://www.zsythink.net/archives/2450 target=_blank rel="noopener noreffer">ssh端口转发：ssh隧道</a> 和<a href=http://www.zsythink.net/archives/2422 target=_blank rel="noopener noreffer">ssh代理转发</a></p></blockquote><h2 id=使用ssh-agentssh代理管理密钥>使用ssh-agent（ssh代理）管理密钥</h2><p>ssh并非一定支持ssh-agent转发的连接。要使用ssh-agent的转发功能，需要在sshd_config中开启<code>AllowAgentForwarding</code>选项，在ssh_config中开启<code>ForwardAgent</code>选项。</p><h4 id=1-启动ssh-agent>1. 启动ssh-agent</h4><p>在 Linux中 ssh-agent 在 X会话 或 登录会话 之初就已经启动，一般都不会有问题,也可以参考以下办法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#方式一:创建子shell, 在子shell中运行ssh-agent进程， 退出子shell自动结束代理。</span>
+</span></span><span class=line><span class=cl>ssh-agent <span class=nv>$SHELL</span>
+</span></span><span class=line><span class=cl><span class=c1>#方式二:单独启动一一个代理进程，退出当前shell时最好使用ssh-agent -k关闭对应代理</span>
+</span></span><span class=line><span class=cl><span class=nb>eval</span> <span class=sb>`</span>ssh-agent<span class=sb>`</span>
+</span></span><span class=line><span class=cl><span class=c1>#GitHub给出的相同方案</span>
+</span></span><span class=line><span class=cl><span class=nb>eval</span> <span class=k>$(</span>ssh-agent -s<span class=k>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 Windows 中，我们选取以下方法其中之一即可配置：</p><ul><li>在 计算机 > 管理 > 服务 > OpenSSH > Authentication Agent> 设置为自动启动</li><li>管理员PowerShell: <code>Set-Service ssh-agent -StartupType Automatic</code></li></ul><h4 id=2-关闭ssh-agent>2. 关闭ssh-agent</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh-agent -k
+</span></span></code></pre></td></tr></table></div></div><h4 id=3-添加私钥>3. 添加私钥</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh-add /path/file
+</span></span></code></pre></td></tr></table></div></div><h4 id=4-查找和删除密钥>4. 查找和删除密钥</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#查看代理的私钥</span>
+</span></span><span class=line><span class=cl>ssh-add -I
+</span></span><span class=line><span class=cl><span class=c1>#查看对应的公钥</span>
+</span></span><span class=line><span class=cl>ssh-add -L
+</span></span><span class=line><span class=cl><span class=c1>#删除指定</span>
+</span></span><span class=line><span class=cl>ssh-add -d /path/file
+</span></span><span class=line><span class=cl><span class=c1>#删除所有</span>
+</span></span><span class=line><span class=cl>ssh-add -D
+</span></span></code></pre></td></tr></table></div></div><h4 id=5-锁定和解锁ssh-sgent>5. 锁定和解锁ssh-sgent</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh-add -x
+</span></span><span class=line><span class=cl>ssh-add -X
+</span></span></code></pre></td></tr></table></div></div><h4 id=6-ssh-add命令>6. ssh-add命令</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>usage: ssh-add <span class=o>[</span>options<span class=o>]</span> <span class=o>[</span>file ...<span class=o>]</span>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -l          List fingerprints of all identities.
+</span></span><span class=line><span class=cl>  -E <span class=nb>hash</span>     Specify <span class=nb>hash</span> algorithm used <span class=k>for</span> fingerprints.
+</span></span><span class=line><span class=cl>  -L          List public key parameters of all identities.
+</span></span><span class=line><span class=cl>  -k          Load only keys and not certificates.
+</span></span><span class=line><span class=cl>  -c          Require confirmation to sign using identities
+</span></span><span class=line><span class=cl>  -m minleft  Maxsign is only changed <span class=k>if</span> less than minleft are left <span class=o>(</span><span class=k>for</span> XMSS<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -M maxsign  Maximum number of signatures allowed <span class=o>(</span><span class=k>for</span> XMSS<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -t life     Set lifetime <span class=o>(</span>in seconds<span class=o>)</span> when adding identities.
+</span></span><span class=line><span class=cl>  -d          Delete identity.
+</span></span><span class=line><span class=cl>  -D          Delete all identities.
+</span></span><span class=line><span class=cl>  -x          Lock agent.
+</span></span><span class=line><span class=cl>  -X          Unlock agent.
+</span></span><span class=line><span class=cl>  -s pkcs11   Add keys from PKCS#11 provider.
+</span></span><span class=line><span class=cl>  -e pkcs11   Remove keys provided by PKCS#11 provider.
+</span></span><span class=line><span class=cl>  -q          Be quiet after a successful operation.
+</span></span></code></pre></td></tr></table></div></div><h2 id=ssh配置文件>ssh配置文件</h2><p>更为详细的细节查看：<a href=https://linux.die.net/man/5/ssh_config target=_blank rel="noopener noreffer">官方手册说明</a></p><h3 id=ssh客户端按以下优先顺序接收其配置>ssh客户端按以下优先顺序接收其配置：</h3><ol><li>从命令行指定的选项</li><li>中定义的选项 ~/.ssh/config</li><li>中定义的选项 /etc/ssh/ssh_config</li></ol><h3 id=ssh用户配置文件>ssh用户配置文件</h3><p>文件<code>~/.ssh/config</code></p><p>常见的配置项</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Host <span class=c1>#别名</span>
+</span></span><span class=line><span class=cl>HostName <span class=c1>#主机名</span>
+</span></span><span class=line><span class=cl>Port <span class=c1>#端口</span>
+</span></span><span class=line><span class=cl>User <span class=c1>#用户名</span>
+</span></span><span class=line><span class=cl>IdentityFile <span class=c1>#密钥文件的路径</span>
+</span></span><span class=line><span class=cl>IdentitiesOnly <span class=c1>#只接受SSH key 登录</span>
+</span></span><span class=line><span class=cl>PreferredAuthentications <span class=c1>#强制使用Public Key验证</span>
+</span></span><span class=line><span class=cl><span class=c1># 走 HTTP 代理</span>
+</span></span><span class=line><span class=cl>ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport<span class=o>=</span><span class=m>8888</span>
+</span></span><span class=line><span class=cl><span class=c1># 走 socks5 代理（如 Shadowsocks）</span>
+</span></span><span class=line><span class=cl>ProxyCommand nc -v -x 127.0.0.1:1088 %h %p
+</span></span></code></pre></td></tr></table></div></div><p>比较完整的配置文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Host *                       			<span class=c1>#选项“Host”只对能够匹配后面字串的计算机有效。“*”表示所有的计算机。</span>
+</span></span><span class=line><span class=cl>    ForwardAgent no                   	<span class=c1>#设置连接是否经过验证代理（如果存在）转发给远程计算机。</span>
+</span></span><span class=line><span class=cl>    ForwardX11 no                      	<span class=c1>#设置X11连接是否被自动重定向到安全的通道和显示集（DISPLAY set）</span>
+</span></span><span class=line><span class=cl>    RhostsAuthentication no            	<span class=c1>#设置是否使用基于rhosts的安全验证。</span>
+</span></span><span class=line><span class=cl>    RhostsRSAAuthentication no         	<span class=c1>#设置是否使用用RSA算法的基于rhosts的安全验证。</span>
+</span></span><span class=line><span class=cl>    RSAAuthentication yes              	<span class=c1>#设置是否使用RSA算法进行安全验证。</span>
+</span></span><span class=line><span class=cl>    PasswordAuthentication yes         	<span class=c1>#设置是否使用口令验证。</span>
+</span></span><span class=line><span class=cl>    FallBackToRsh no                  	<span class=c1>#设置如果用ssh连接出现错误是否自动使用rsh。</span>
+</span></span><span class=line><span class=cl>    UseRsh no                         	<span class=c1>#设置是否在这台计算机上使用“rlogin/rsh”。</span>
+</span></span><span class=line><span class=cl>    BatchMode no                    	<span class=c1>#如果设为“yes”，passphrase/password（交互式输入口令）的提示将被禁止。当不能交互式输入口令的时候,这个选项对脚本文件和批处理任务十分有用。</span>
+</span></span><span class=line><span class=cl>    CheckHostIP yes               		<span class=c1>#设置ssh是否查看连接到服务器的主机的IP地址以防止DNS欺骗。建议设置为“yes”。</span>
+</span></span><span class=line><span class=cl>    StrictHostKeyChecking no        	<span class=c1>#如果设置成“yes”，ssh就不会自动把计算机的密匙加入“$HOME/.ssh/known_hosts”文件，并且一旦计算机的密匙发生了变化， 就拒绝连接。</span>
+</span></span><span class=line><span class=cl>    IdentityFile ~/.ssh/identity     	<span class=c1>#设置从哪个文件读取用户的RSA安全验证标识。</span>
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>                       		<span class=c1>#设置连接到远程主机的端口。</span>
+</span></span><span class=line><span class=cl>    Protocol 2,1　　       				<span class=c1># 选择的 SSH 协议版本，可以是 1 也可以是 2 ，如果要同时支持两者，就必须要使用 2,1 这个分隔了！</span>
+</span></span><span class=line><span class=cl>    GSSAPIAuthenticationno            	<span class=c1>#是否允许使用基于GSSAPI 的用户认证.默认值为&#34;yes&#34;.仅用于SSH-2</span>
+</span></span><span class=line><span class=cl>    Cipher blowfish                    	<span class=c1>#设置加密用的密码。</span>
+</span></span><span class=line><span class=cl>    EscapeChar ~                      	<span class=c1>#设置escape字符。</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=跳板机相关设置>跳板机相关设置</h4><ul><li>需要 OpenSSH 7.3 以上版本可以使用<code>ProxyJump</code>
+举例:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-SHELL data-lang=SHELL><span class=line><span class=cl>Host tiaoban1    <span class=c1># 代表跳板机 1</span>
+</span></span><span class=line><span class=cl>    HostName 跳板机 <span class=m>1</span> 的 IP
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>    <span class=c1># ssh 连接端口</span>
+</span></span><span class=line><span class=cl>    User username1    <span class=c1># 跳板机 1 的用户名</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host tiaoban2    <span class=c1># 代表跳板机 2</span>
+</span></span><span class=line><span class=cl>    HostName 跳板机 <span class=m>2</span> 的 IP
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>    <span class=c1># ssh 连接端口</span>
+</span></span><span class=line><span class=cl>    User username2    <span class=c1># 跳板机 2 的用户名</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host target    <span class=c1># 代表目标机器的名字</span>
+</span></span><span class=line><span class=cl>    HostName 目标机器 IP    <span class=c1># 这个是目标机器的 IP</span>
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>    <span class=c1># 目标机器 ssh 的端口</span>
+</span></span><span class=line><span class=cl>    User username_target    <span class=c1># 目标机器的用户名</span>
+</span></span><span class=line><span class=cl>    ProxyJump tiaoban1,tiaoban2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host 10.10.0.*    <span class=c1># 使用通配符 * 代表 10.10.0.1 - 10.10.0.255</span>
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>    <span class=c1># 服务器端口</span>
+</span></span><span class=line><span class=cl>    User username    <span class=c1># 服务器用户名</span>
+</span></span><span class=line><span class=cl>    ProxyJump tiaoban1,tiaoban2
+</span></span></code></pre></td></tr></table></div></div><ul><li>OpenSSH 版本低于 7.3 可以使用<code>ProxyCommand</code>
+举例:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-SHELL data-lang=SHELL><span class=line><span class=cl>Host tiaoban   <span class=c1># 任意名字，随便使用</span>
+</span></span><span class=line><span class=cl>    HostName 跳板机的 IP，支持域名
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>      <span class=c1># 跳板机端口</span>
+</span></span><span class=line><span class=cl>    User username_tiaoban       <span class=c1># 跳板机用户</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host target      <span class=c1># 同样，任意名字，随便起</span>
+</span></span><span class=line><span class=cl>    HostName 目标服务器 IP    <span class=c1># 真正登陆的服务器，不支持域名必须IP地址</span>
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>   <span class=c1># 服务器的端口</span>
+</span></span><span class=line><span class=cl>    User username   <span class=c1># 服务器的用户</span>
+</span></span><span class=line><span class=cl>    ProxyCommand ssh tiaoban -W %h:%p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Host 10.10.0.*      <span class=c1># 可以用*通配符</span>
+</span></span><span class=line><span class=cl>    Port <span class=m>22</span>   <span class=c1># 服务器的端口</span>
+</span></span><span class=line><span class=cl>    User username   <span class=c1># 服务器的用户</span>
+</span></span><span class=line><span class=cl>    ProxyCommand ssh tiaoban -W %h:%p
+</span></span></code></pre></td></tr></table></div></div><h3 id=ssh系统配置文件>ssh系统配置文件</h3><p>文件<code>/etc/ssh/ssh_config</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#选项参数	                          		说明</span>
+</span></span><span class=line><span class=cl>Host *	                           	<span class=c1>#选项“Host”只对能够匹配后面字串的计算机有效。“*”表示所有的计算机。</span>
+</span></span><span class=line><span class=cl>ForwardAgent no	                 	<span class=c1>#设置连接是否经过验证代理（如果存在）转发给远程计算机。</span>
+</span></span><span class=line><span class=cl>ForwardX11 no	                  	<span class=c1>#设置X11连接是否被自动重定向到安全的通道和显示集（DISPLAY set）</span>
+</span></span><span class=line><span class=cl>RhostsAuthentication no	          	<span class=c1>#设置是否使用基于rhosts的安全验证</span>
+</span></span><span class=line><span class=cl>RhostsRSAAuthentication no			<span class=c1>#设置是否使用用RSA算法的基于rhosts的安全验证</span>
+</span></span><span class=line><span class=cl>RSAAuthentication yes	           	<span class=c1>#设置是否使用RSA算法进行安全验证</span>
+</span></span><span class=line><span class=cl>PasswordAuthentication yes	      	<span class=c1>#设置是否使用口令验证</span>
+</span></span><span class=line><span class=cl>FallBackToRsh no	              	<span class=c1>#设置如果用ssh连接出现错误是否自动使用rsh</span>
+</span></span><span class=line><span class=cl>UseRsh no	                      	<span class=c1>#设置是否在这台计算机上使用“rlogin/rsh”</span>
+</span></span><span class=line><span class=cl>BatchMode no	                  	<span class=c1>#如果设为“yes”，passphrase/password（交互式输入口令）的提示将被禁止。当不能交互式输入口令的时候，这个选项对脚本文件和批处理任务十分有用</span>
+</span></span><span class=line><span class=cl>CheckHostIP yes	                  	<span class=c1>#设置ssh是否查看连接到服务器的主机的IP地址以防止DNS欺骗。建议设置为“yes”</span>
+</span></span><span class=line><span class=cl>StrictHostKeyChecking no	       	<span class=c1>#如果设置成“yes”，ssh就不会自动把计算机的密匙加入“$HOME/.ssh/known_hosts”文件，并且一旦计算机的密匙发生了变化，就拒绝连接</span>
+</span></span><span class=line><span class=cl>IdentityFile ~/.ssh/identity	   	<span class=c1>#设置从哪个文件读取用户的RSA安全验证标识</span>
+</span></span><span class=line><span class=cl>Port 22	                           	<span class=c1>#设置连接到远程主机的端口</span>
+</span></span><span class=line><span class=cl>Cipher blowfish	                  	<span class=c1>#设置加密用的密码</span>
+</span></span><span class=line><span class=cl>EscapeChar ~	                  	<span class=c1>#设置escape字符</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=ssh服务器配置文件>ssh服务器配置文件</h3><p>文件<code>/etc/ssh/sshd_config</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#参数选项                  			  说明</span>
+</span></span><span class=line><span class=cl>Port <span class=m>22</span>                      		<span class=c1>#SSH 预设使用 22 这个 port，您也可以使用多的 port ！</span>
+</span></span><span class=line><span class=cl>Protocol 2,1                 		<span class=c1>#选择的 SSH 协议版本，可以是 1 也可以是 2 ，如果要同时支持两者，就必须要使用 2,1 这个分隔了！</span>
+</span></span><span class=line><span class=cl>ListenAddress 0.0.0.0          		<span class=c1>#监听的主机适配卡！举个例子来说，如果您有两个 IP，分别是 192.168.0.100 及 192.168.2.20 ，那么只想要开放 192.168.0.100 时，就可以写如同下面的样式：</span>
+</span></span><span class=line><span class=cl>ListenAddress 192.168.0.100      	<span class=c1>#只监听来自 192.168.0.100 这个 IP 的SSH联机。如果不使用设定的话，则预设所有接口均接受 SSH</span>
+</span></span><span class=line><span class=cl>PidFile /var/run/sshd.pid    		<span class=c1>#可以放置 SSHD 这个 PID 的档案！左列为默认值</span>
+</span></span><span class=line><span class=cl>LoginGraceTime <span class=m>600</span>       			<span class=c1>#当使用者连上 SSH server 之后，会出现输入密码的画面，在该画面中，在多久时间内没有成功连上 SSH server ，就断线！时间为秒！</span>
+</span></span><span class=line><span class=cl>Compression yes          			<span class=c1>#是否可以使用压缩指令？</span>
+</span></span><span class=line><span class=cl>HostKey /etc/ssh/ssh_host_key      	<span class=c1>#SSH version 1 使用的私钥</span>
+</span></span><span class=line><span class=cl>HostKey /etc/ssh/ssh_host_rsa_key  	<span class=c1>#SSH version 2 使用的 RSA 私钥</span>
+</span></span><span class=line><span class=cl>HostKey /etc/ssh/ssh_host_dsa_key 	<span class=c1>#SSH version 2 使用的 DSA 私钥</span>
+</span></span><span class=line><span class=cl>KeyRegenerationInterval <span class=m>3600</span>    	<span class=c1>#由前面联机的说明可以知道， version 1 会使用 server 的 Public Key ，每隔一段时间来重新建立一次！时间为秒！</span>
+</span></span><span class=line><span class=cl>ServerKeyBits <span class=m>768</span>          			<span class=c1># Server key 的长度！</span>
+</span></span><span class=line><span class=cl>SyslogFacility AUTH               	<span class=c1>#当有人使用 SSH 登入系统的时候，SSH会记录信息</span>
+</span></span><span class=line><span class=cl>LogLevel INFO                		<span class=c1>#登录记录的等级---》全部</span>
+</span></span><span class=line><span class=cl>PermitRootLogin no              	<span class=c1>#是否允许 root 登入！预设是允许的，但是建议设定成 no！</span>
+</span></span><span class=line><span class=cl>UserLogin no                     	<span class=c1>#在 SSH 底下本来就不接受 login 这个程序的登入！</span>
+</span></span><span class=line><span class=cl>StrictModes yes                   	<span class=c1>#当使用者的 host key 改变之后，Server 就不接受联机</span>
+</span></span><span class=line><span class=cl>RSAAuthentication yes           	<span class=c1>#是否使用纯的 RSA 认证！？仅针对 version 1 ！</span>
+</span></span><span class=line><span class=cl>PubkeyAuthentication yes        	<span class=c1>#是否允许 Public Key ？只有 version 2</span>
+</span></span><span class=line><span class=cl>AuthorizedKeysFile   .ssh/authorized_keys    	<span class=c1>#设定若要使用不需要密码登入的账号时，那么那个账号的存放档案所在档名！</span>
+</span></span><span class=line><span class=cl>RhostsAuthentication no         	<span class=c1>#本机系统不使用 .rhosts ， .rhosts 不安全！</span>
+</span></span><span class=line><span class=cl>IgnoreRhosts yes            		<span class=c1>#是否取消使用 ~/.ssh/.rhosts 来做为认证！</span>
+</span></span><span class=line><span class=cl>RhostsRSAAuthentication no     		<span class=c1>#针对 version 1 ，使用 rhosts 档案在/etc/hosts.equiv配合 RSA 演算方式来进行认证！</span>
+</span></span><span class=line><span class=cl>HostbasedAuthentication no     		<span class=c1>#这个项目与上面的项目类似，不过是给 version 2 使用的！</span>
+</span></span><span class=line><span class=cl>IgnoreUserKnownHosts no        		<span class=c1>#是否忽略家目录内的 ~/.ssh/known_hosts 这个档案所记录的主机内容</span>
+</span></span><span class=line><span class=cl>PasswordAuthentication yes      	<span class=c1>#密码验证当然是需要的！</span>
+</span></span><span class=line><span class=cl>PermitEmptyPasswords no          	<span class=c1>#上面那一项如果设定为 yes 的话，这一项就最好设定为 no ，这个项目在是否允许以空的密码登入！</span>
+</span></span><span class=line><span class=cl>ChallengeResponseAuthentication yes  	<span class=c1>#挑战任何的密码认证！所以，任何 login.conf 规定的认证方式，均可适用！</span>
+</span></span><span class=line><span class=cl>PAMAuthenticationViaKbdInt yes    	<span class=c1>#是否启用其它的 PAM 模块！启用这个模块将会导致 PasswordAuthentication 设定失效！</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#与Kerberos 有关的参数设定！底下不用设定</span>
+</span></span><span class=line><span class=cl>KerberosAuthentication no
+</span></span><span class=line><span class=cl>KerberosOrLocalPasswd yes
+</span></span><span class=line><span class=cl>KerberosTicketCleanup yes
+</span></span><span class=line><span class=cl>KerberosTgtPassing no
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#有关在 X-Window 底下使用的相关设定</span>
+</span></span><span class=line><span class=cl>X11Forwarding yes
+</span></span><span class=line><span class=cl>X11DisplayOffset <span class=m>10</span>
+</span></span><span class=line><span class=cl>X11UseLocalhost yes
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>PrintMotd no                    	<span class=c1>#登入后是否显示出一些信息呢？例如上次登入的时间、地点等，预设是 yes ，但是，如果为了安全，可以考虑改为 no ！</span>
+</span></span><span class=line><span class=cl>PrintLastLog yes              		<span class=c1>#显示上次登入的信息！预设也是 yes </span>
+</span></span><span class=line><span class=cl>KeepAlive yes                    	<span class=c1>#一般而言，如果设定这项目的话，那么 SSH Server 会传送KeepAlive 的讯息给 Client 端，以确保两者的联机正常！在这个情况下，任何一端死掉后， SSH 可以立刻知道！而不会有僵尸程序的发生！</span>
+</span></span><span class=line><span class=cl>UsePrivilegeSeparation yes       	<span class=c1>#使用者的权限设定项目！</span>
+</span></span><span class=line><span class=cl>MaxStartups <span class=m>10</span>                 		<span class=c1>#同时允许几个尚未登入的联机画面</span>
+</span></span><span class=line><span class=cl>DenyUsers *                  		<span class=c1>#设定受抵挡的使用者名称</span>
+</span></span><span class=line><span class=cl>AllowUsers *                    	<span class=c1>#设定允许的使用者名称</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=个人使用示例>个人使用示例</h2><h4 id=配置示例>配置示例</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># ~/.ssh/config</span>
+</span></span><span class=line><span class=cl>Host Work
+</span></span><span class=line><span class=cl>    HostName 39.***.***.80
+</span></span><span class=line><span class=cl>    User ***
+</span></span><span class=line><span class=cl>    Port ***
+</span></span><span class=line><span class=cl>    PreferredAuthentications publickey 
+</span></span><span class=line><span class=cl>    IdentityFile C:<span class=se>\U</span>sers<span class=se>\*</span>**<span class=se>\.</span>ssh<span class=se>\i</span>d_rsa_work
+</span></span><span class=line><span class=cl>    AddkeysToAgent yes
+</span></span><span class=line><span class=cl>Host github
+</span></span><span class=line><span class=cl>    HostName github.com 
+</span></span><span class=line><span class=cl>    User git
+</span></span><span class=line><span class=cl>    PreferredAuthentications publickey 
+</span></span><span class=line><span class=cl>    IdentityFile C:<span class=se>\U</span>sers<span class=se>\*</span>**<span class=se>\.</span>ssh<span class=se>\i</span>d_rsa_github_PC
+</span></span><span class=line><span class=cl>    AddkeysToAgent yes
+</span></span><span class=line><span class=cl>    ProxyCommand connect -S 127.0.0.1:1080 %h %p
+</span></span></code></pre></td></tr></table></div></div><h4 id=实际使用栗子>实际使用栗子</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>eval</span> <span class=k>$(</span>ssh-agent -s<span class=k>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#github</span>
+</span></span><span class=line><span class=cl>git clone github:XuzhaoWang/test.git
+</span></span><span class=line><span class=cl>ssh -T github
+</span></span><span class=line><span class=cl><span class=c1>#other</span>
+</span></span><span class=line><span class=cl>ssh Work
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考文章>参考文章</h2><ol start=0><li><p><a href=https://www.cnblogs.com/f-ck-need-u/p/7129122.html target=_blank rel="noopener noreffer">ssh命令和SSH服务详解</a></p></li><li><p><a href=https://www.cnblogs.com/pipci/p/9791707.html target=_blank rel="noopener noreffer">SSH概述与配置文件说明</a></p></li><li><p><a href=https://deepzz.com/post/how-to-setup-ssh-config.html target=_blank rel="noopener noreffer">SSH Config 那些你所知道和不知道的事</a></p></li><li><p><a href=https://www.cnblogs.com/f-ck-need-u/p/10484531.html target=_blank rel="noopener noreffer">ssh转发代理：ssh-agent用法详解</a></p></li><li><p><a href=https://www.cnblogs.com/f-ck-need-u/p/10484531.html target=_blank rel="noopener noreffer">ssh转发代理：ssh-agent用法详解</a></p></li><li><p><a href=https://www.cnblogs.com/f-ck-need-u/p/10482832.html target=_blank rel="noopener noreffer">SSH隧道：端口转发功能详解</a></p></li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-07-09</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/setting-ssh/index.md target=_blank>Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=http://example.org/setting-ssh/ data-title=SSH的配置 data-via=xxxx data-hashtags=ssh><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=http://example.org/setting-ssh/ data-hashtag=ssh><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=http://example.org/setting-ssh/ data-title=SSH的配置><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=http://example.org/setting-ssh/ data-title=SSH的配置><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=http://example.org/setting-ssh/ data-title=SSH的配置><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/ssh/>ssh</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/remote-work/ class=prev rel=prev title=远程办公><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>远程办公</a>
+<a href=/hexo-blog/ class=next rel=next title=Hexo博客的构建>Hexo博客的构建<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.115.2">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2019 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>wxzhao</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/index.umd.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"id-1":"wxzhao's blog","id-2":"wxzhao's blog"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:50,type:"lunr"},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"id-1":["id-1"],"id-2":["id-2"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
