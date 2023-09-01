@@ -1,6 +1,5 @@
 # collections in python
 
-
 # collections in python
 
 ## merge dict
